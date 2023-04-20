@@ -1,3 +1,17 @@
+  
+  multiply(y) {
+    return this.x * y;
+  }
+}
+
+// Create a new instance of the Multiplier class
+const multiplier = new Multiplier(5);
+
+// Multiply 7 by 5 using the multiply method
+const result = multiplier.multiply(7);
+
+console.log(result); // Output: 35
+=======
 class Fraction {
   constructor(numerator, denominator) {
     this.numerator = numerator;
@@ -22,7 +36,6 @@ class Fraction {
     let resultDenom = lcd;
     let commonDivisor = this.gcd(resultNum, resultDenom);
     return new Fraction(resultNum / commonDivisor, resultDenom / commonDivisor);
-  }
 }
 
 // Example usage
@@ -50,6 +63,11 @@ subtract(other) {
 
     // Return the result as a new fraction
     return new Fraction(simplifiedNumerator, simplifiedDenominator);
+    
+  divide(otherFraction) {
+    const numerator = this.numerator * otherFraction.denominator;
+    const denominator = this.denominator * otherFraction.numerator;
+    return new Fraction(numerator, denominator);
   }
 
   toString() {
@@ -57,14 +75,12 @@ subtract(other) {
   }
 }
 
-// Define the fractions to subtract
-const fraction1 = new Fraction(1, 4);
+// Example usage
+const fraction1 = new Fraction(3, 4);
 const fraction2 = new Fraction(1, 2);
 
-// Subtract the fractions
-const resultFraction = fraction1.subtract(fraction2);
+const result = fraction1.divide(fraction2);
+console.log(result.toString()); // Output: "3/2"
 
 // Print the result
 console.log(`${fraction1.toString()} - ${fraction2.toString()} = ${resultFraction.toString()}`);
-
-
