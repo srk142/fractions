@@ -4,25 +4,10 @@ class Fraction {
     this.denominator = denominator;
   }
 
-  subtract(other) {
-    // Find the common denominator
-    const commonDenominator = this.denominator * other.denominator;
-
-    // Convert both fractions to have the same denominator
-    const newNumerator1 = this.numerator * other.denominator;
-    const newNumerator2 = other.numerator * this.denominator;
-
-    // Subtract the numerators
-    const resultNumerator = newNumerator1 - newNumerator2;
-
-    // Simplify the result fraction
-    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-    const gcdResult = gcd(resultNumerator, commonDenominator);
-    const simplifiedNumerator = resultNumerator / gcdResult;
-    const simplifiedDenominator = commonDenominator / gcdResult;
-
-    // Return the result as a new fraction
-    return new Fraction(simplifiedNumerator, simplifiedDenominator);
+  divide(otherFraction) {
+    const numerator = this.numerator * otherFraction.denominator;
+    const denominator = this.denominator * otherFraction.numerator;
+    return new Fraction(numerator, denominator);
   }
 
   toString() {
@@ -30,12 +15,9 @@ class Fraction {
   }
 }
 
-// Define the fractions to subtract
-const fraction1 = new Fraction(1, 4);
+// Example usage
+const fraction1 = new Fraction(3, 4);
 const fraction2 = new Fraction(1, 2);
 
-// Subtract the fractions
-const resultFraction = fraction1.subtract(fraction2);
-
-// Print the result
-console.log(`${fraction1.toString()} - ${fraction2.toString()} = ${resultFraction.toString()}`);
+const result = fraction1.divide(fraction2);
+console.log(result.toString()); // Output: "3/2"
