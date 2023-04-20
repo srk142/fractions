@@ -84,3 +84,78 @@ console.log(result.toString()); // Output: "3/2"
 
 // Print the result
 console.log(`${fraction1.toString()} - ${fraction2.toString()} = ${resultFraction.toString()}`);
+
+  add(other) {
+    // Find the common denominator
+    const commonDenominator = this.denominator * other.denominator;
+
+    // Convert both fractions to have the same denominator
+    const newNumerator1 = this.numerator * other.denominator;
+    const newNumerator2 = other.numerator * this.denominator;
+
+    // Add the numerators
+    const resultNumerator = newNumerator1 + newNumerator2;
+
+    // Simplify the result fraction
+    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+    const gcdResult = gcd(resultNumerator, commonDenominator);
+    const simplifiedNumerator = resultNumerator / gcdResult;
+    const simplifiedDenominator = commonDenominator / gcdResult;
+
+    // Return the result as a new fraction
+    return new Fraction(simplifiedNumerator, simplifiedDenominator);
+  }
+
+  toString() {
+    return `${this.numerator}/${this.denominator}`;
+  }
+}
+
+// Define the fractions to add
+const fraction1 = new Fraction(1, 4);
+const fraction2 = new Fraction(1, 2);
+
+// Add the fractions
+const resultFraction = fraction1.add(fraction2);
+
+// Print the result
+console.log(`${fraction1.toString()} + ${fraction2.toString()} = ${resultFraction.toString()}`);
+
+  compare(other) {
+    // Find the common denominator
+    const commonDenominator = this.denominator * other.denominator;
+
+    // Convert both fractions to have the same denominator
+    const newNumerator1 = this.numerator * other.denominator;
+    const newNumerator2 = other.numerator * this.denominator;
+
+    // Compare the numerators
+    if (newNumerator1 < newNumerator2) {
+      return -1;
+    } else if (newNumerator1 > newNumerator2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  toString() {
+    return `${this.numerator}/${this.denominator}`;
+  }
+}
+
+// Define the fractions to compare
+const fraction1 = new Fraction(1, 4);
+const fraction2 = new Fraction(1, 2);
+
+// Compare the fractions
+const comparison = fraction1.compare(fraction2);
+
+// Print the result
+if (comparison < 0) {
+  console.log(`${fraction1.toString()} is less than ${fraction2.toString()}`);
+} else if (comparison > 0) {
+  console.log(`${fraction1.toString()} is greater than ${fraction2.toString()}`);
+} else {
+  console.log(`${fraction1.toString()} is equal to ${fraction2.toString()}`);
+}
